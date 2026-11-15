@@ -32,6 +32,18 @@ jobs:
           go build -v -o /dev/null ./cmd/cloudflare
           go build -v -o /dev/null ./cmd/aliyun
           go build -v -o /dev/null ./cmd/dnspod
+          go build -v -o /dev/null ./cmd/aws
+          go build -v -o /dev/null ./cmd/gd
+          go build -v -o /dev/null ./cmd/dgon
+          go build -v -o /dev/null ./cmd/gcloud
+          go build -v -o /dev/null ./cmd/namecheap
+          go build -v -o /dev/null ./cmd/azure
+          go build -v -o /dev/null ./cmd/ovh
+          go build -v -o /dev/null ./cmd/hetznercloud
+          go build -v -o /dev/null ./cmd/duckdns
+          go build -v -o /dev/null ./cmd/porkbun
+          go build -v -o /dev/null ./cmd/namesilo
+          go build -v -o /dev/null ./cmd/vultr
 
       - name: Validate Windows Build
         run: |
@@ -39,4 +51,16 @@ jobs:
           env GOOS=windows go build -v -o /dev/null ./cmd/cloudflare
           env GOOS=windows go build -v -o /dev/null ./cmd/aliyun
           env GOOS=windows go build -v -o /dev/null ./cmd/dnspod
+          env GOOS=windows go build -v -o /dev/null ./cmd/aws
+          env GOOS=windows go build -v -o /dev/null ./cmd/gd
+          env GOOS=windows go build -v -o /dev/null ./cmd/dgon
+          env GOOS=windows go build -v -o /dev/null ./cmd/gcloud
+          env GOOS=windows go build -v -o /dev/null ./cmd/namecheap
+          env GOOS=windows go build -v -o /dev/null ./cmd/azure
+          env GOOS=windows go build -v -o /dev/null ./cmd/ovh
+          env GOOS=windows go build -v -o /dev/null ./cmd/hetznercloud
+          env GOOS=windows go build -v -o /dev/null ./cmd/duckdns
+          env GOOS=windows go build -v -o /dev/null ./cmd/porkbun
+          env GOOS=windows go build -v -o /dev/null ./cmd/namesilo
+          env GOOS=windows go build -v -o /dev/null ./cmd/vultr
 

@@ -49,4 +49,6 @@
   - 唯一网络通信目标：`https://dnspod.tencentcloudapi.com/`（仅调用 `CreateRecord` 与 `DeleteRecord`）。
 - **手动模式** ([cmd/manual/main.go](./cmd/manual/main.go))：
   - 零环境变量读取、零外部 API 请求，完全通过标准输入/输出交互。
+- **其他内置 DNS 入口**（如 `cmd/aws`、`cmd/gd`、`cmd/dgon`、`cmd/gcloud`、`cmd/namecheap`、`cmd/azure`、`cmd/ovh`、`cmd/hetznercloud`、`cmd/duckdns`、`cmd/porkbun`、`cmd/namesilo`、`cmd/vultr` 等，完整清单见 [README_zh.md](./README_zh.md)）：
+  - 均遵循相同的单文件最小化隔离结构：仅按需读取统一环境变量 `DNS_ID`、`DNS_SECRET`、`DNS_ZONE`，且仅向对应 DNS 服务商的官方 API 端点发起 TXT 记录增删（或认证换取 Token）请求，无任何额外遥测或跨厂商通信。
 
