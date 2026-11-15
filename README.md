@@ -38,20 +38,56 @@ github.com/eoasmxd/acme-nano/
 
 ## 2. Quick Start
 
+Choose one of the following three ways to obtain and run `acme-nano` depending on your audit and deployment workflow (see [Makefile](./Makefile) for the binary names of all entrypoints):
+
+### Option 1: Build from Source on Demand (Recommended for Self-Audit)
+
+Compile only the single-file entrypoint for your DNS provider:
+
+```bash
+go build -o acme-cf ./cmd/cloudflare
+# Or build all entrypoints into bin/
+make build
+```
+
+### Option 2: Download Official Prebuilt Binaries
+
+Download the release archive matching your OS and architecture (`acme-nano_<version>_<os>_<arch>.tar.gz` or `.zip`) from [GitHub Releases](https://github.com/eoasmxd/acme-nano/releases), extract it, and run the desired `acme-<provider>` binary directly:
+
+```bash
+tar -xzf acme-nano_<version>_linux_amd64.tar.gz
+cd acme-nano_<version>_linux_amd64
+./acme-cf -d "example.com,*.example.com"
+```
+
+### Option 3: Use the Official Docker Image
+
+The official multi-arch image includes all `acme-<provider>` binaries with `/certs` as the default `WORKDIR` and `VOLUME` (so generated certificates and `account.key` persist directly in your mounted host directory):
+
+- **GitHub Container Registry (GHCR)**: `ghcr.io/eoasmxd/acme-nano:latest`
+- **Docker Hub**: `eoasmxd/acme-nano:latest`
+
+```bash
+docker run --rm -v "$(pwd)/certs:/certs" \
+  -e DNS_SECRET="your_cloudflare_api_token" \
+  -e DNS_ZONE="your_zone_id" \
+  ghcr.io/eoasmxd/acme-nano:latest \
+  acme-cf -d "example.com,*.example.com"
+```
+
+---
+
 ### 1. Manual Mode (`cmd/manual`)
 
 Useful for protocol testing or DNS providers without API automation:
 
 ```bash
-go build -o acme-manual ./cmd/manual
 ./acme-manual -ca letsencrypt-staging -d "example.com,*.example.com"
 ```
 
 ### 2. Cloudflare Mode (`cmd/cloudflare`)
 
 ```bash
-go build -o acme-cf ./cmd/cloudflare
-
 export DNS_SECRET="your_cloudflare_api_token"
 export DNS_ZONE="your_zone_id"
 
@@ -61,8 +97,6 @@ export DNS_ZONE="your_zone_id"
 ### 3. Aliyun DNS Mode (`cmd/aliyun`)
 
 ```bash
-go build -o acme-aliyun ./cmd/aliyun
-
 export DNS_ID="your_access_key_id"
 export DNS_SECRET="your_access_key_secret"
 export DNS_ZONE="example.com"
@@ -73,8 +107,6 @@ export DNS_ZONE="example.com"
 ### 4. Tencent Cloud DNSPod Mode (`cmd/dnspod`)
 
 ```bash
-go build -o acme-dnspod ./cmd/dnspod
-
 export DNS_ID="your_secret_id"
 export DNS_SECRET="your_secret_key"
 export DNS_ZONE="example.com"
@@ -90,9 +122,21 @@ All API-based entrypoints use the unified environment variables `DNS_ID`, `DNS_S
 
 | DNS Provider | `DNS_ID` | `DNS_SECRET` | `DNS_ZONE` |
 | :--- | :--- | :--- | :--- |
-| Cloudflare | Not required | Cloudflare API Token | Zone ID |
-| Aliyun DNS | AccessKeyId | AccessKeySecret | Apex domain (e.g. `example.com`) |
-| Tencent Cloud DNSPod | SecretId | SecretKey | Apex domain (e.g. `example.com`) |
+| Cloudflare (`cmd/cloudflare`) | Not required | Cloudflare API Token | Zone ID |
+| Aliyun DNS (`cmd/aliyun`) | AccessKeyId | AccessKeySecret | Apex domain (e.g. `example.com`) |
+| Tencent Cloud DNSPod (`cmd/dnspod`) | SecretId | SecretKey | Apex domain (e.g. `example.com`) |
+| AWS Route 53 (`cmd/aws`) | AWS Access Key ID | AWS Secret Access Key | Hosted Zone ID (e.g. `Z123456`) |
+| GoDaddy (`cmd/gd`) | API Key | API Secret | Apex domain (e.g. `example.com`) |
+| DigitalOcean (`cmd/dgon`) | Not required | DigitalOcean API Token | Apex domain (e.g. `example.com`) |
+| Google Cloud DNS (`cmd/gcloud`) | GCP Project ID | OAuth2 Bearer Token or Service Account JSON | Managed Zone name |
+| Namecheap (`cmd/namecheap`) | `ApiUser:ClientIp` (defaults to `127.0.0.1` if omitted) | Namecheap API Key | Apex domain (e.g. `example.com`) |
+| Microsoft Azure DNS (`cmd/azure`) | `TenantID/ClientID` | Client Secret | `SubscriptionID/ResourceGroup/ZoneName` |
+| OVHcloud (`cmd/ovh`) | Application Key (`AK`) | `ApplicationSecret:ConsumerKey` (`AS:CK`) | Apex domain (or `ovh-us/example.com` with endpoint) |
+| Hetzner Cloud DNS (`cmd/hetznercloud`) | Not required | Hetzner Cloud API Token | Apex domain (e.g. `example.com`) |
+| DuckDNS (`cmd/duckdns`) | Not required | DuckDNS Token | Optional, domain (auto-extracted from `-d` if unset) |
+| Porkbun (`cmd/porkbun`) | API Key | Secret API Key | Apex domain (e.g. `example.com`) |
+| NameSilo (`cmd/namesilo`) | Not required | NameSilo API Key | Apex domain (e.g. `example.com`) |
+| Vultr (`cmd/vultr`) | Not required | Vultr API Key | Apex domain (e.g. `example.com`) |
 
 Optional CA EAB (External Account Binding) environment variables for ZeroSSL / Google CA:
 

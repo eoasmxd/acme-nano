@@ -49,3 +49,5 @@ You only need to review the `cmd/<provider>/main.go` file you compile:
   - Sole network destination: `https://dnspod.tencentcloudapi.com/` (`CreateRecord` and `DeleteRecord` only).
 - **Manual Mode** ([cmd/manual/main.go](./cmd/manual/main.go)):
   - Reads zero environment variables and makes zero provider API calls; communicates solely via stdin/stdout.
+- **Other Built-in DNS Entrypoints** (e.g. `cmd/aws`, `cmd/gd`, `cmd/dgon`, `cmd/gcloud`, `cmd/namecheap`, `cmd/azure`, `cmd/ovh`, `cmd/hetznercloud`, `cmd/duckdns`, `cmd/porkbun`, `cmd/namesilo`, `cmd/vultr`; see [README.md](./README.md) for the full list):
+  - All follow the same minimal single-file isolation pattern: they read only the unified `DNS_ID`, `DNS_SECRET`, and `DNS_ZONE` environment variables as needed and communicate strictly with their respective provider's official API endpoints for TXT record management (and token exchange where required), with zero telemetry or cross-provider traffic.

@@ -10,24 +10,96 @@ app:
 	env CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-cf_linux_386 ./cmd/cloudflare
 	env CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-aliyun_linux_386 ./cmd/aliyun
 	env CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-dnspod_linux_386 ./cmd/dnspod
+	env CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-aws_linux_386 ./cmd/aws
+	env CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-gd_linux_386 ./cmd/gd
+	env CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-dgon_linux_386 ./cmd/dgon
+	env CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-gcloud_linux_386 ./cmd/gcloud
+	env CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-namecheap_linux_386 ./cmd/namecheap
+	env CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-azure_linux_386 ./cmd/azure
+	env CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-ovh_linux_386 ./cmd/ovh
+	env CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-hetznercloud_linux_386 ./cmd/hetznercloud
+	env CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-duckdns_linux_386 ./cmd/duckdns
+	env CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-porkbun_linux_386 ./cmd/porkbun
+	env CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-namesilo_linux_386 ./cmd/namesilo
+	env CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-vultr_linux_386 ./cmd/vultr
 	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-manual_linux_amd64 ./cmd/manual
 	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-cf_linux_amd64 ./cmd/cloudflare
 	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-aliyun_linux_amd64 ./cmd/aliyun
 	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-dnspod_linux_amd64 ./cmd/dnspod
+	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-aws_linux_amd64 ./cmd/aws
+	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-gd_linux_amd64 ./cmd/gd
+	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-dgon_linux_amd64 ./cmd/dgon
+	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-gcloud_linux_amd64 ./cmd/gcloud
+	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-namecheap_linux_amd64 ./cmd/namecheap
+	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-azure_linux_amd64 ./cmd/azure
+	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-ovh_linux_amd64 ./cmd/ovh
+	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-hetznercloud_linux_amd64 ./cmd/hetznercloud
+	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-duckdns_linux_amd64 ./cmd/duckdns
+	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-porkbun_linux_amd64 ./cmd/porkbun
+	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-namesilo_linux_amd64 ./cmd/namesilo
+	env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-vultr_linux_amd64 ./cmd/vultr
 	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-manual_linux_arm ./cmd/manual
 	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-cf_linux_arm ./cmd/cloudflare
 	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-aliyun_linux_arm ./cmd/aliyun
 	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-dnspod_linux_arm ./cmd/dnspod
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-aws_linux_arm ./cmd/aws
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-gd_linux_arm ./cmd/gd
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-dgon_linux_arm ./cmd/dgon
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-gcloud_linux_arm ./cmd/gcloud
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-namecheap_linux_arm ./cmd/namecheap
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-azure_linux_arm ./cmd/azure
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-ovh_linux_arm ./cmd/ovh
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-hetznercloud_linux_arm ./cmd/hetznercloud
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-duckdns_linux_arm ./cmd/duckdns
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-porkbun_linux_arm ./cmd/porkbun
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-namesilo_linux_arm ./cmd/namesilo
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -ldflags "$(LDFLAGS)" -o ./acme-vultr_linux_arm ./cmd/vultr
 	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-manual_linux_arm64 ./cmd/manual
 	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-cf_linux_arm64 ./cmd/cloudflare
 	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-aliyun_linux_arm64 ./cmd/aliyun
 	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-dnspod_linux_arm64 ./cmd/dnspod
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-aws_linux_arm64 ./cmd/aws
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-gd_linux_arm64 ./cmd/gd
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-dgon_linux_arm64 ./cmd/dgon
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-gcloud_linux_arm64 ./cmd/gcloud
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-namecheap_linux_arm64 ./cmd/namecheap
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-azure_linux_arm64 ./cmd/azure
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-ovh_linux_arm64 ./cmd/ovh
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-hetznercloud_linux_arm64 ./cmd/hetznercloud
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-duckdns_linux_arm64 ./cmd/duckdns
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-porkbun_linux_arm64 ./cmd/porkbun
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-namesilo_linux_arm64 ./cmd/namesilo
+	env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -o ./acme-vultr_linux_arm64 ./cmd/vultr
 	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-manual_windows_386.exe ./cmd/manual
 	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-cf_windows_386.exe ./cmd/cloudflare
 	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-aliyun_windows_386.exe ./cmd/aliyun
 	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-dnspod_windows_386.exe ./cmd/dnspod
+	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-aws_windows_386.exe ./cmd/aws
+	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-gd_windows_386.exe ./cmd/gd
+	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-dgon_windows_386.exe ./cmd/dgon
+	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-gcloud_windows_386.exe ./cmd/gcloud
+	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-namecheap_windows_386.exe ./cmd/namecheap
+	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-azure_windows_386.exe ./cmd/azure
+	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-ovh_windows_386.exe ./cmd/ovh
+	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-hetznercloud_windows_386.exe ./cmd/hetznercloud
+	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-duckdns_windows_386.exe ./cmd/duckdns
+	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-porkbun_windows_386.exe ./cmd/porkbun
+	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-namesilo_windows_386.exe ./cmd/namesilo
+	env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags "$(LDFLAGS)" -o ./acme-vultr_windows_386.exe ./cmd/vultr
 	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-manual_windows_amd64.exe ./cmd/manual
 	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-cf_windows_amd64.exe ./cmd/cloudflare
 	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-aliyun_windows_amd64.exe ./cmd/aliyun
 	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-dnspod_windows_amd64.exe ./cmd/dnspod
+	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-aws_windows_amd64.exe ./cmd/aws
+	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-gd_windows_amd64.exe ./cmd/gd
+	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-dgon_windows_amd64.exe ./cmd/dgon
+	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-gcloud_windows_amd64.exe ./cmd/gcloud
+	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-namecheap_windows_amd64.exe ./cmd/namecheap
+	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-azure_windows_amd64.exe ./cmd/azure
+	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-ovh_windows_amd64.exe ./cmd/ovh
+	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-hetznercloud_windows_amd64.exe ./cmd/hetznercloud
+	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-duckdns_windows_amd64.exe ./cmd/duckdns
+	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-porkbun_windows_amd64.exe ./cmd/porkbun
+	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-namesilo_windows_amd64.exe ./cmd/namesilo
+	env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o ./acme-vultr_windows_amd64.exe ./cmd/vultr
 

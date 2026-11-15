@@ -1,6 +1,6 @@
 package core
 
-var version string = "1.0.1"
+var version string = "1.0.2"
 
 // Version 返回当前程序版本号。
 func Version() string {

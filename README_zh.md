@@ -38,20 +38,56 @@ github.com/eoasmxd/acme-nano/
 
 ## 二、 快速编译与使用
 
+您可以根据自身安全审计与部署习惯，选择以下三种方式之一获取并运行 `acme-nano`（所有入口二进制命名规则可对照 [Makefile](./Makefile)）：
+
+### 方式一：从源码按需编译（推荐用于自主审计）
+
+仅编译自己所需 DNS 服务商的单文件入口：
+
+```bash
+go build -o acme-cf ./cmd/cloudflare
+# 或一次性编译全部入口到 bin/ 目录
+make build
+```
+
+### 方式二：下载官方预编译二进制
+
+直接前往 [GitHub Releases](https://github.com/eoasmxd/acme-nano/releases) 下载对应平台与架构的官方压缩包（`acme-nano_<version>_<os>_<arch>.tar.gz` 或 `.zip`），解压后即可按需使用其中的 `acme-<provider>` 单文件二进制：
+
+```bash
+tar -xzf acme-nano_<version>_linux_amd64.tar.gz
+cd acme-nano_<version>_linux_amd64
+./acme-cf -d "example.com,*.example.com"
+```
+
+### 方式三：使用官方 Docker 镜像
+
+官方多架构镜像内置了全部 `acme-<provider>` 入口，默认工作目录与挂载卷为 `/certs`（证书及 `account.key` 将直接保存在宿主机挂载目录中）：
+
+- **GitHub Container Registry (GHCR)**：`ghcr.io/eoasmxd/acme-nano:latest`
+- **Docker Hub**：`eoasmxd/acme-nano:latest`
+
+```bash
+docker run --rm -v "$(pwd)/certs:/certs" \
+  -e DNS_SECRET="你的_Cloudflare_API_Token" \
+  -e DNS_ZONE="你的_Zone_ID" \
+  ghcr.io/eoasmxd/acme-nano:latest \
+  acme-cf -d "example.com,*.example.com"
+```
+
+---
+
 ### 1. 手动交互模式 (`cmd/manual`)
 
 适用于首次联调协议或长尾 DNS 服务商：
 
 ```bash
-go build -o acme-manual ./cmd/manual
 ./acme-manual -ca letsencrypt-staging -d "example.com,*.example.com"
 ```
 
 ### 2. Cloudflare 模式 (`cmd/cloudflare`)
 
 ```bash
-go build -o acme-cf ./cmd/cloudflare
-
 export DNS_SECRET="你的_Cloudflare_API_Token"
 export DNS_ZONE="你的_Zone_ID"
 
@@ -61,8 +97,6 @@ export DNS_ZONE="你的_Zone_ID"
 ### 3. 阿里云 DNS 模式 (`cmd/aliyun`)
 
 ```bash
-go build -o acme-aliyun ./cmd/aliyun
-
 export DNS_ID="你的_AccessKeyId"
 export DNS_SECRET="你的_AccessKeySecret"
 export DNS_ZONE="example.com"
@@ -73,8 +107,6 @@ export DNS_ZONE="example.com"
 ### 4. 腾讯云 DNSPod 模式 (`cmd/dnspod`)
 
 ```bash
-go build -o acme-dnspod ./cmd/dnspod
-
 export DNS_ID="你的_SecretId"
 export DNS_SECRET="你的_SecretKey"
 export DNS_ZONE="example.com"
@@ -90,9 +122,21 @@ export DNS_ZONE="example.com"
 
 | DNS 服务商 | `DNS_ID` | `DNS_SECRET` | `DNS_ZONE` |
 | :--- | :--- | :--- | :--- |
-| Cloudflare | 无需设置 | Cloudflare API Token | Zone ID |
-| 阿里云 DNS | AccessKeyId | AccessKeySecret | 主域名（如 `example.com`） |
-| 腾讯云 DNSPod | SecretId | SecretKey | 主域名（如 `example.com`） |
+| Cloudflare (`cmd/cloudflare`) | 无需设置 | Cloudflare API Token | Zone ID |
+| 阿里云 DNS (`cmd/aliyun`) | AccessKeyId | AccessKeySecret | 主域名（如 `example.com`） |
+| 腾讯云 DNSPod (`cmd/dnspod`) | SecretId | SecretKey | 主域名（如 `example.com`） |
+| AWS Route 53 (`cmd/aws`) | AWS Access Key ID | AWS Secret Access Key | Hosted Zone ID（如 `Z123456`） |
+| GoDaddy (`cmd/gd`) | API Key | API Secret | 主域名（如 `example.com`） |
+| DigitalOcean (`cmd/dgon`) | 无需设置 | DigitalOcean API Token | 主域名（如 `example.com`） |
+| Google Cloud DNS (`cmd/gcloud`) | GCP Project ID | OAuth2 Bearer Token 或 Service Account JSON | Managed Zone 名称 |
+| Namecheap (`cmd/namecheap`) | `ApiUser:ClientIp`（省略 IP 时默认 `127.0.0.1`） | Namecheap API Key | 主域名（如 `example.com`） |
+| Microsoft Azure DNS (`cmd/azure`) | `TenantID/ClientID` | Client Secret | `SubscriptionID/ResourceGroup/ZoneName` |
+| OVHcloud (`cmd/ovh`) | Application Key (`AK`) | `ApplicationSecret:ConsumerKey` (`AS:CK`) | 主域名（或 `ovh-us/example.com` 指定端点） |
+| Hetzner Cloud DNS (`cmd/hetznercloud`) | 无需设置 | Hetzner Cloud API Token | 主域名（如 `example.com`） |
+| DuckDNS (`cmd/duckdns`) | 无需设置 | DuckDNS Token | 可选，主域名（不设则从 `-d` 自动提取） |
+| Porkbun (`cmd/porkbun`) | API Key | Secret API Key | 主域名（如 `example.com`） |
+| NameSilo (`cmd/namesilo`) | 无需设置 | NameSilo API Key | 主域名（如 `example.com`） |
+| Vultr (`cmd/vultr`) | 无需设置 | Vultr API Key | 主域名（如 `example.com`） |
 
 当使用 ZeroSSL 或 Google CA 等需要外部账户绑定（EAB）的发证机构时，可额外设置以下环境变量：
 

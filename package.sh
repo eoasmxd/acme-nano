@@ -22,7 +22,7 @@ mkdir -p ./packages
 
 os_all='linux windows'
 arch_all='386 amd64 arm arm64'
-bins='acme-manual acme-cf acme-aliyun acme-dnspod'
+bins='acme-manual acme-cf acme-aliyun acme-dnspod acme-aws acme-gd acme-dgon acme-gcloud acme-namecheap acme-azure acme-ovh acme-hetznercloud acme-duckdns acme-porkbun acme-namesilo acme-vultr'
 
 for os in $os_all; do
     for arch in $arch_all; do
