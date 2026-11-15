@@ -84,6 +84,33 @@ func (a *AliyunProvider) Present(fqdn, value string) error {
 	if !ok || rr == "" {
 		return fmt.Errorf("domain %s does not belong to zone %s", cleanFQDN, cleanZone)
 	}
+	listBody, err := a.doRequest(map[string]string{
+		"Action":     "DescribeSubDomainRecords",
+		"DomainName": cleanZone,
+		"SubDomain":  cleanFQDN,
+		"Type":       "TXT",
+	})
+	if err != nil {
+		return err
+	}
+	var listRes struct {
+		DomainRecords struct {
+			Record []struct {
+				RecordID string `json:"RecordId"`
+			} `json:"Record"`
+		} `json:"DomainRecords"`
+	}
+	if err := json.Unmarshal(listBody, &listRes); err != nil {
+		return fmt.Errorf("failed to parse Aliyun DNS records: %s", string(listBody))
+	}
+	for _, rec := range listRes.DomainRecords.Record {
+		if _, err := a.doRequest(map[string]string{
+			"Action":   "DeleteDomainRecord",
+			"RecordId": rec.RecordID,
+		}); err != nil {
+			return err
+		}
+	}
 	body, err := a.doRequest(map[string]string{
 		"Action":     "AddDomainRecord",
 		"DomainName": cleanZone,

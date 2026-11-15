@@ -102,6 +102,35 @@ func (d *DNSPodProvider) Present(fqdn, value string) error {
 	if !ok || subDomain == "" {
 		return fmt.Errorf("domain %s does not belong to zone %s", cleanFQDN, cleanZone)
 	}
+	listBody, err := d.doRequest("DescribeRecordList", map[string]any{
+		"Domain":     cleanZone,
+		"Subdomain":  subDomain,
+		"RecordType": "TXT",
+	})
+	if err != nil {
+		if !strings.Contains(err.Error(), "ResourceNotFound.NoDataOfRecord") {
+			return err
+		}
+	} else {
+		var listRes struct {
+			Response struct {
+				RecordList []struct {
+					RecordID uint64 `json:"RecordId"`
+				} `json:"RecordList"`
+			} `json:"Response"`
+		}
+		if err := json.Unmarshal(listBody, &listRes); err != nil {
+			return fmt.Errorf("failed to parse Tencent Cloud DNSPod RecordList: %s", string(listBody))
+		}
+		for _, rec := range listRes.Response.RecordList {
+			if _, err := d.doRequest("DeleteRecord", map[string]any{
+				"Domain":   cleanZone,
+				"RecordId": rec.RecordID,
+			}); err != nil {
+				return err
+			}
+		}
+	}
 	body, err := d.doRequest("CreateRecord", map[string]any{
 		"Domain":     cleanZone,
 		"SubDomain":  subDomain,
