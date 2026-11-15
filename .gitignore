@@ -1,0 +1,39 @@
+# 编译生成的目标文件、静态与动态库
+*.o
+*.a
+*.so
+
+# 临时构建与测试目录
+_obj
+_test
+
+# 各架构编译器中间产物
+*.[568vq]
+[568vq].out
+
+*.cgo1.go
+*.cgo2.c
+_cgo_defun.c
+_cgo_gotypes.go
+_cgo_export.*
+
+_testmain.go
+
+*.exe
+*.test
+*.prof
+
+# 本项目构建产物与本地证书密钥
+bin/
+packages/
+acme-manual_*
+acme-cf_*
+acme-aliyun_*
+acme-dnspod_*
+*.key
+*.pem
+*.crt
+
+# 编辑器缓存
+*.swp
+
