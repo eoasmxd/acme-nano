@@ -50,7 +50,7 @@ for os in $os_all; do
             mv "./${bin}_${os}_${arch}${ext}" "${pkg_path}/${bin}${ext}"
         done
 
-        cp ./LICENSE ./README.md ./README_zh.md "${pkg_path}/"
+        cp ./LICENSE ./README.md ./README.zh.md "${pkg_path}/"
 
         # 打包压缩归档文件
         cd ./packages

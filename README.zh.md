@@ -12,9 +12,9 @@
 github.com/eoasmxd/acme-nano/
 ├── go.mod                      # 仅声明 module 与 Go 版本，零外部依赖
 ├── README.md                   # 英文主文档
-├── README_zh.md                # 中文说明文档
+├── README.zh.md                # 中文说明文档
 ├── AUDIT.md                    # 英文安全审计指南
-├── AUDIT_zh.md                 # 中文安全审计指南
+├── AUDIT.zh.md                 # 中文安全审计指南
 ├── core/                       # [ACME 内核] 纯 RFC 8555 协议实现
 │   ├── acme.go                 # 核心状态机：证书到期检测、账户注册、下单、串行挑战、CSR 签发
 │   ├── ca.go                   # 内置主流 ACME v2 发证机构 (CA) 预设目录与解析器

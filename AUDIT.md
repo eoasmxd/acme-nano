@@ -1,6 +1,6 @@
 # acme-nano Security Audit Guide
 
-English | [中文审计指南](./AUDIT_zh.md)
+English | [中文审计指南](./AUDIT.zh.md)
 
 `acme-nano` is designed so that any engineer familiar with basic Go can **audit the entire codebase within 5 minutes**, eliminating supply-chain risks and DNS credential leakage.
 
