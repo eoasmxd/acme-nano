@@ -1,6 +1,6 @@
 # acme-nano
 
-English | [中文文档](./README_zh.md)
+English | [中文文档](./README.zh.md)
 
 A minimal ACME v2 client built exclusively with the **Go standard library (zero third-party dependencies)**, focused on **DNS-01 challenges**, **on-demand single-file entrypoints**, and **rapid code auditability**.
 
@@ -12,9 +12,9 @@ A minimal ACME v2 client built exclusively with the **Go standard library (zero 
 github.com/eoasmxd/acme-nano/
 ├── go.mod                      # Module declaration only; zero external dependencies
 ├── README.md                   # English documentation (primary)
-├── README_zh.md                # Chinese documentation
+├── README.zh.md                # Chinese documentation
 ├── AUDIT.md                    # English security audit guide (primary)
-├── AUDIT_zh.md                 # Chinese security audit guide
+├── AUDIT.zh.md                 # Chinese security audit guide
 ├── core/                       # [ACME Core] Pure RFC 8555 protocol implementation
 │   ├── acme.go                 # State machine: expiry check, account, order, serial challenge, CSR
 │   ├── ca.go                   # Built-in ACME v2 CA directory presets & resolver
