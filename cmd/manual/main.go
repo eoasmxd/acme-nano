@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 
 	"github.com/eoasmxd/acme-nano/core"
@@ -15,10 +14,10 @@ type ManualProvider struct{}
 // Present displays the TXT record details and waits for the user to press Enter.
 // Present 打印 TXT 记录详情并等待用户按回车键继续。
 func (m *ManualProvider) Present(fqdn, value string) error {
-	fmt.Printf("\n[Manual DNS Challenge] Add the following TXT record at your DNS provider:\n")
-	fmt.Printf("  FQDN : %s\n", fqdn)
-	fmt.Printf("  Value: %s\n", value)
-	fmt.Printf("Press Enter after the record has been added...")
+	core.LogInfo(
+		"[Manual DNS Challenge] Add the following TXT record at your DNS provider:\n  FQDN : %s\n  Value: %s\nPress Enter after the record has been added...",
+		fqdn, value,
+	)
 	_, err := bufio.NewReader(os.Stdin).ReadString('\n')
 	return err
 }
@@ -26,7 +25,7 @@ func (m *ManualProvider) Present(fqdn, value string) error {
 // CleanUp notifies the user that the challenge TXT record can be safely removed.
 // CleanUp 提示用户验证已完成，可删除对应的 TXT 记录。
 func (m *ManualProvider) CleanUp(fqdn, value string) error {
-	fmt.Printf("[Manual DNS CleanUp] Validation finished. You may now remove %s (value: %s)\n", fqdn, value)
+	core.LogInfo("[Manual DNS CleanUp] Validation finished. You may now remove %s (value: %s)", fqdn, value)
 	return nil
 }
 

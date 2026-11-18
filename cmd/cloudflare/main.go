@@ -132,7 +132,7 @@ func main() {
 		zoneID: os.Getenv("DNS_ZONE"),
 	}
 	if provider.token == "" || provider.zoneID == "" {
-		fmt.Fprintln(os.Stderr, "Error: environment variables DNS_SECRET and DNS_ZONE must be set")
+		core.LogError("Error: environment variables DNS_SECRET and DNS_ZONE must be set")
 		os.Exit(1)
 	}
 	core.Run(provider)

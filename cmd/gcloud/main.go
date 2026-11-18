@@ -167,7 +167,7 @@ func main() {
 		zoneName:  os.Getenv("DNS_ZONE"),
 	}
 	if provider.projectID == "" || provider.secret == "" || provider.zoneName == "" {
-		fmt.Fprintln(os.Stderr, "Error: environment variables DNS_ID (Project ID), DNS_SECRET (Bearer Token or SA JSON), and DNS_ZONE (Managed Zone) must be set")
+		core.LogError("Error: environment variables DNS_ID (Project ID), DNS_SECRET (Bearer Token or SA JSON), and DNS_ZONE (Managed Zone) must be set")
 		os.Exit(1)
 	}
 	core.Run(provider)

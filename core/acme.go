@@ -92,10 +92,9 @@ func Run(provider DNSProvider) {
 		Provider:     provider,
 	})
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Issuance failed: %v\n", err)
+		LogError("Issuance failed: %v", err)
 		os.Exit(1)
 	}
-	fmt.Println("Certificate issued successfully.")
 }
 
 // Issue executes the complete ACME DNS-01 certificate issuance workflow.
@@ -130,7 +129,7 @@ func Issue(cfg Config) error {
 	}
 
 	if isCertificateStillValid(cfg.CertOut, domains) {
-		fmt.Printf("Local certificate %s is valid for more than 30 days and covers all domains; skipping issuance\n", cfg.CertOut)
+		LogInfo("Local certificate is valid for more than 30 days and covers all domains; skipping issuance.")
 		return nil
 	}
 
@@ -257,7 +256,11 @@ func Issue(cfg Config) error {
 	if err != nil {
 		return fmt.Errorf("failed to download certificate chain: %w", err)
 	}
-	return os.WriteFile(cfg.CertOut, certPEM, 0644)
+	if err := os.WriteFile(cfg.CertOut, certPEM, 0644); err != nil {
+		return err
+	}
+	LogInfo("Certificate issued successfully (%s).", cfg.CertOut)
+	return nil
 }
 
 // solveAuthorization performs serial DNS-01 provisioning, propagation polling, CA verification, and cleanup.
@@ -301,12 +304,12 @@ func solveAuthorization(client *jwsClient, authzURL string, provider DNSProvider
 	}
 	defer func() {
 		if cleanErr := provider.CleanUp(fqdn, txtValue); cleanErr != nil {
-			fmt.Fprintf(os.Stderr, "Warning: failed to clean up DNS TXT record (%s): %v\n", fqdn, cleanErr)
+			LogError("Warning: failed to clean up DNS TXT record (%s): %v", fqdn, cleanErr)
 		}
 	}()
 
 	if err := waitForDNSPropagation(fqdn, txtValue, 120*time.Second); err != nil {
-		fmt.Fprintf(os.Stderr, "Warning: %v; proceeding to trigger CA validation\n", err)
+		LogError("Warning: %v; proceeding to trigger CA validation", err)
 	}
 
 	if _, _, err := client.postJWS(challengeURL, map[string]any{}); err != nil {
@@ -347,7 +350,14 @@ func isCertificateStillValid(certPath string, domains []string) bool {
 	if err != nil {
 		return false
 	}
-	if time.Until(cert.NotAfter) <= 30*24*time.Hour {
+	remaining := time.Until(cert.NotAfter)
+	daysLeft := int(remaining.Hours() / 24)
+	LogInfo(
+		"Found local certificate (%s):\n  Issuer : %s\n  Domains: %s\n  Expires: %s (%d days left)",
+		certPath, cert.Issuer.CommonName, strings.Join(cert.DNSNames, ", "), cert.NotAfter.Format(time.RFC3339), daysLeft,
+	)
+
+	if remaining <= 30*24*time.Hour {
 		return false
 	}
 	for _, d := range domains {
@@ -358,4 +368,16 @@ func isCertificateStillValid(certPath string, domains []string) bool {
 		}
 	}
 	return true
+}
+
+// LogInfo 格式化并向标准输出打印带统一前缀与换行隔离的日志信息。
+func LogInfo(format string, args ...any) {
+	msg := strings.TrimRight(fmt.Sprintf(format, args...), "\r\n")
+	fmt.Fprintf(os.Stdout, "\n[acme-nano] %s\n", msg)
+}
+
+// LogError 格式化并向标准错误输出打印带统一前缀与换行隔离的错误或警告信息。
+func LogError(format string, args ...any) {
+	msg := strings.TrimRight(fmt.Sprintf(format, args...), "\r\n")
+	fmt.Fprintf(os.Stderr, "\n[acme-nano] %s\n", msg)
 }
