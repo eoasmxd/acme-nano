@@ -98,7 +98,7 @@ func main() {
 		domain: os.Getenv("DNS_ZONE"),
 	}
 	if provider.apiKey == "" || provider.domain == "" {
-		fmt.Fprintln(os.Stderr, "Error: environment variables DNS_SECRET and DNS_ZONE must be set")
+		core.LogError("Error: environment variables DNS_SECRET and DNS_ZONE must be set")
 		os.Exit(1)
 	}
 	core.Run(provider)

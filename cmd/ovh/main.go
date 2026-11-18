@@ -142,7 +142,7 @@ func main() {
 	}
 
 	if appKey == "" || !okSecret || appSecret == "" || consumerKey == "" || domain == "" {
-		fmt.Fprintln(os.Stderr, "Error: set DNS_ID='AppKey', DNS_SECRET='AppSecret:ConsumerKey', DNS_ZONE='example.com' (or 'ovh-eu/example.com')")
+		core.LogError("Error: set DNS_ID='AppKey', DNS_SECRET='AppSecret:ConsumerKey', DNS_ZONE='example.com' (or 'ovh-eu/example.com')")
 		os.Exit(1)
 	}
 	core.Run(&OVHProvider{

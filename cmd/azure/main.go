@@ -132,7 +132,7 @@ func main() {
 	zoneParts := strings.SplitN(os.Getenv("DNS_ZONE"), "/", 3)
 	secret := os.Getenv("DNS_SECRET")
 	if !okID || tenantID == "" || clientID == "" || secret == "" || len(zoneParts) != 3 {
-		fmt.Fprintln(os.Stderr, "Error: set DNS_ID='tenantID/clientID', DNS_SECRET='clientSecret', DNS_ZONE='subscriptionID/resourceGroup/zoneName'")
+		core.LogError("Error: set DNS_ID='tenantID/clientID', DNS_SECRET='clientSecret', DNS_ZONE='subscriptionID/resourceGroup/zoneName'")
 		os.Exit(1)
 	}
 	core.Run(&AzureProvider{
